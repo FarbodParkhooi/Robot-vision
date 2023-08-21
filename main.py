@@ -13,5 +13,5 @@ while True:
     success, image = cap.read() # Read camera video
     Faces, image = Face_Detector.findFaces(image)
 
-    cv.imshow("Robot vision", image)
+    cv.imshow("Robot vision", Faces)
     cv.waitKey(1)
