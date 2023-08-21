@@ -9,9 +9,10 @@ cap = cv.VideoCapture(1) # Change video capture
 
 Face_Detector = FaceDetector(minDetectionCon=10) # Change facedetector options
 
+# Show attributes
 while True:
     success, image = cap.read() # Read camera video
-    Faces, image = Face_Detector.findFaces(image)
+    Faces, image = Face_Detector.findFaces(image) # Show faces
 
-    cv.imshow("Robot vision", Faces)
-    cv.waitKey(1)
+    cv.imshow("Robot vision", Faces) # Show camera video
+    cv.waitKey(1) # Change waitkey
