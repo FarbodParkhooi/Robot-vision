@@ -4,7 +4,7 @@ from cvzone.HandTrackingModule import HandDetector
 import cv2 as cv
 
 # Create values:
-cap = cv.VideoCapture(0) # Change video capture
+cap = cv.VideoCapture(1) # Change video capture
 
 # detections:
 Face_Detector = FaceDetector(minDetectionCon=10) # Change facedetector options
