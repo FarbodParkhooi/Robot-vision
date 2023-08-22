@@ -16,15 +16,15 @@ smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml") # Read haarcascade
 fullbody_cascade = cv.CascadeClassifier("haarcascade_fullbody.xml") # Read haarcascade_fullbody.xml
 
 def resize_frame(frame, percent=150):
-    width = int(frame.shape[1] * percent/ 100)
-    height = int(frame.shape[0] * percent/ 100)
-    dim = (width, height)
-    return cv.resize(frame, dim, interpolation =cv.INTER_AREA)
+    width = int(frame.shape[1] * percent/ 100) # resize with
+    height = int(frame.shape[0] * percent/ 100) # resize height
+    dim = (width, height) # change sizes
+    return cv.resize(frame, dim, interpolation =cv.INTER_AREA) # return camera output(resized)
 
 # Show attributes
 while True:
     success, image = cap.read() # Read camera video
-    image = resize_frame(image)
+    image = resize_frame(image) # resize image
     Faces, img = Face_Detector.findFaces(image) # Find Faces
     Hands, image = Hand_Detector.findHands(image) # Find Hands
     eyes = eye_cascade.detectMultiScale(Faces) # Find eyes
