@@ -15,6 +15,12 @@ eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") # Read haarcascade_eye
 smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml") # Read haarcascade_smile.xml
 fullbody_cascade = cv.CascadeClassifier("haarcascade_fullbody.xml") # Read haarcascade_fullbody.xml
 
+""" 
+This function target: 
+        Resize video frame by frame
+Its work?
+        Yes!
+"""
 def resize_frame(frame, percent=150):
     width = int(frame.shape[1] * percent/ 100) # resize with
     height = int(frame.shape[0] * percent/ 100) # resize height
