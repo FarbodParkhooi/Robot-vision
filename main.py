@@ -5,6 +5,7 @@ import cv2 as cv
 
 # Create values:
 cap = cv.VideoCapture(1) # Change video capture
+says = ["not sayed"]
 
 # detections:
 Face_Detector = FaceDetector(minDetectionCon=10) # Change facedetector options
@@ -14,6 +15,8 @@ Hand_Detector = HandDetector(detectionCon=0.5, maxHands=2) # Change handdetector
 eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") # Read haarcascade_eye.xml
 smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml") # Read haarcascade_smile.xml
 fullbody_cascade = cv.CascadeClassifier("haarcascade_fullbody.xml") # Read haarcascade_fullbody.xml
+
+# defs:
 
 """ 
 This function target: 
@@ -25,7 +28,20 @@ def resize_frame(frame, percent=150):
     width = int(frame.shape[1] * percent/ 100) # resize with
     height = int(frame.shape[0] * percent/ 100) # resize height
     dim = (width, height) # change sizes
-    return cv.resize(frame, dim, interpolation =cv.INTER_AREA) # return camera output(resized)
+    return cv.resize(frame, dim, interpolation=cv.INTER_AREA) # return camera output(resized)
+"""
+This function target:
+        Say hello
+It's work?
+        Yes!        
+"""
+def Hello():
+    import pyttsx3 # import library
+    engine = pyttsx3.init()
+    engine.setProperty('rate', 125) # Change sepeed 
+    engine.say("Hello!") # Say hello
+    engine.runAndWait() # Do it!
+    return "I Finished"
 
 # Show attributes
 while True:
@@ -65,6 +81,16 @@ while True:
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 0, 255), 2) # rectangle smiles
     for (ex, ey, ew, eh) in fullbody: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 2) # rectangle bodys
+
+    if says[0] != "sayed":
+        if Hands: # if hand is in camera
+            if Faces in image: # if face is in camera
+                if len(eyes) > 0: # if eye is in camera
+                    code = Hello() # Say hello
+                    says.clear() # clear andis 1
+                    says.append("sayed") # add sayed
+    else:
+        pass
 
     # Show it!
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
