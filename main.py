@@ -12,7 +12,7 @@ Hand_Detector = HandDetector(detectionCon=0.5, maxHands=2) # Change handdetector
 
 # Cascades:
 eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") # Read haarcascade_eye.xml
-smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml")
+smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml")# Read haarcascade_eye.xml
 
 # Show attributes
 while True:
@@ -23,9 +23,9 @@ while True:
     for (ex, ey, ew, eh) in eyes: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2) # rectangle eyes
 
-    smiles = smile_cascade.detectMultiScale(Faces, 1.8, 20) # Find eyes
+    smiles = smile_cascade.detectMultiScale(Faces, 1.8, 20) # Find smiles
     for (ex, ey, ew, eh) in smiles: 
-        cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 0, 255), 2) # rectangle eyes
+        cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 0, 255), 2) # rectangle smiles
 
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
     cv.imshow("Robot vision", image) # Show (Hands on) camera video
