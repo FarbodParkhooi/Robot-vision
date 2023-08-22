@@ -31,6 +31,7 @@ while True:
     for (ex, ey, ew, eh) in fullbody: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 2) # rectangle bodys
 
+    # Show it!
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
     cv.imshow("Robot vision", image) # Show (Hands on) camera video
     cv.waitKey(1) # Change waitkey
