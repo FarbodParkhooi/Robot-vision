@@ -14,7 +14,6 @@ Hand_Detector = HandDetector(detectionCon=0.5, maxHands=2) # Change handdetector
 # Cascades:
 eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") # Read haarcascade_eye.xml
 smile_cascade = cv.CascadeClassifier("haarcascade_smile.xml") # Read haarcascade_smile.xml
-fullbody_cascade = cv.CascadeClassifier("haarcascade_fullbody.xml") # Read haarcascade_fullbody.xml
 
 # defs:
 
@@ -72,14 +71,11 @@ while True:
     Hands, image = Hand_Detector.findHands(image) # Find Hands
     eyes = eye_cascade.detectMultiScale(Faces) # Find eyes
     smiles = smile_cascade.detectMultiScale(Faces, 1.8, 20) # Find smiles
-    fullbody = fullbody_cascade.detectMultiScale(image, scaleFactor=1.1) # Find bodys
     # Rectangle eyes, smiles and bodys:
     for (ex, ey, ew, eh) in eyes: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2) # rectangle eyes
     for (ex, ey, ew, eh) in smiles: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 0, 255), 2) # rectangle smiles
-    for (ex, ey, ew, eh) in fullbody: 
-        cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (255, 0, 0), 2) # rectangle bodys
 
     if says[0] != "sayed":
         if Hands: # if hand is in camera
