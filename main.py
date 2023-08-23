@@ -1,6 +1,8 @@
 # import librarys:
 from cvzone.FaceDetectionModule import FaceDetector
 from cvzone.HandTrackingModule import HandDetector
+from cvzone.PoseModule import PoseDetector
+import numpy as np
 import cv2 as cv
 
 # Create values:
@@ -10,6 +12,7 @@ says = ["not sayed", "not sayed", "not sayed"]
 # detections:
 Face_Detector = FaceDetector(minDetectionCon=10) # Change facedetector options
 Hand_Detector = HandDetector(detectionCon=0.5, maxHands=2) # Change handdetector options 
+Pose_Detector = PoseDetector() # Change Pose detector options
 
 # Cascades:
 eye_cascade = cv.CascadeClassifier("haarcascade_eye.xml") # Read haarcascade_eye.xml
@@ -71,18 +74,25 @@ while True:
     Hands, image = Hand_Detector.findHands(image) # Find Hands
     eyes = eye_cascade.detectMultiScale(Faces) # Find eyes
     smiles = smile_cascade.detectMultiScale(Faces, 1.8, 20) # Find smiles
+    Poses = Pose_Detector.findPose(image) # Find Poses
     # Rectangle eyes, smiles and bodys:
     for (ex, ey, ew, eh) in eyes: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2) # rectangle eyes
     for (ex, ey, ew, eh) in smiles: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 0, 255), 2) # rectangle smiles
-
+    lmList, bboxInfo = Pose_Detector.findPosition(image, bboxWithHands=False)
+    if bboxInfo:
+        center = bboxInfo["center"]
+        cv.circle(image, center, 5, (255, 0, 255), cv.FILLED)
+    
+    # Say words after:
     if says[0] != "sayed":
-        if Hands: # if hand is in camera
-            if Faces in image: # if face is in camera
-                if len(eyes) > 0: # if eye is in camera
-                    code = Hello() # Say hello
-                    says[0] = "sayed" # add sayed
+        if len(Poses) > 0: # if body is in image then:
+            if Hands: # if hand is in camera
+                if Faces in image: # if face is in camera
+                    if len(eyes) > 0: # if eye is in camera
+                        code = Hello() # Say hello
+                        says[0] = "sayed" # add sayed
     else:
         pass
 
