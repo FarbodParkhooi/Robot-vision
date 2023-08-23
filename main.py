@@ -5,7 +5,7 @@ import cv2 as cv
 
 # Create values:
 cap = cv.VideoCapture(1) # Change video capture
-says = ["not sayed"]
+says = ["not sayed", "not sayed", "not sayed"]
 
 # detections:
 Face_Detector = FaceDetector(minDetectionCon=10) # Change facedetector options
@@ -46,7 +46,6 @@ def Hello():
 # Show attributes
 while True:
     success, image = cap.read() # Read camera video
-    image = resize_frame(image) # resize image
 
     # Move detection code:
     
@@ -59,7 +58,7 @@ while True:
     
     frame_diff = cv.absdiff(frame1, frame2) # frame1 - frame2
     frame_diff = cv.cvtColor(frame_diff, cv.COLOR_BGR2GRAY) # grayscal video
-    blurred_frame = cv.GaussianBlur(frame_diff, (5,5), 9999999) # blur frmaes
+    blurred_frame = cv.GaussianBlur(frame_diff, (5,5), 1) # blur frmaes
     _, mask = cv.threshold(blurred_frame, 10, 255, cv.THRESH_BINARY)
 
     # find movments:
@@ -87,12 +86,18 @@ while True:
             if Faces in image: # if face is in camera
                 if len(eyes) > 0: # if eye is in camera
                     code = Hello() # Say hello
-                    says.clear() # clear andis 1
-                    says.append("sayed") # add sayed
+                    says[0] = "sayed" # add sayed
     else:
         pass
+
+        """
+        bad az inke How_are_you() anjam shod age fasele beyn angosht shast va eshare kamtar az {x} bood kr masalan bege khoobam bege "Its great!"
+        """
 
     # Show it!
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
     cv.imshow("Robot vision", image) # Show (Hands on) camera video
-    cv.waitKey(1) # Change waitkey
+    if cv.waitKey(1) & 0xFF == ord('q'): # If q pressed then:
+        break
+cap.release()
+cv.destroyAllWindows()
