@@ -16,12 +16,15 @@
   You can write these codes in CMD or Console to download librarys:
   
   cvzone:
+
       pip install cvzone
 
   numpy:
+
       pip install numpy
 
-  CV2;
+  CV2:
+
       pip install opencv-python
 # Powered by
  - Python
