@@ -51,24 +51,24 @@ while True:
 
     # Move detection code:
     
-    # These are created for moving detector
-    rec, frame1 = cap.read() # Read camera video
-    rec, frame2 = cap.read() # Read camera video
-    # resize frames:
-    frame1 = resize_frame(frame1) # resize frame 1
-    frame2 = resize_frame(frame2) # resize frame 2
+    # # These are created for moving detector
+    # rec, frame1 = cap.read() # Read camera video
+    # rec, frame2 = cap.read() # Read camera video
+    # # resize frames:
+    # frame1 = resize_frame(frame1) # resize frame 1
+    # frame2 = resize_frame(frame2) # resize frame 2
     
-    frame_diff = cv.absdiff(frame1, frame2) # frame1 - frame2
-    frame_diff = cv.cvtColor(frame_diff, cv.COLOR_BGR2GRAY) # grayscal video
-    blurred_frame = cv.GaussianBlur(frame_diff, (5,5), 1) # blur frmaes
-    _, mask = cv.threshold(blurred_frame, 10, 255, cv.THRESH_BINARY)
+    # frame_diff = cv.absdiff(frame1, frame2) # frame1 - frame2
+    # frame_diff = cv.cvtColor(frame_diff, cv.COLOR_BGR2GRAY) # grayscal video
+    # blurred_frame = cv.GaussianBlur(frame_diff, (5,5), 1) # blur frmaes
+    # _, mask = cv.threshold(blurred_frame, 10, 255, cv.THRESH_BINARY)
 
-    # find movments:
-    Contours, _ = cv.findContours(mask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    # # find movments:
+    # Contours, _ = cv.findContours(mask, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
 
-    for Contour in Contours:
-        (x, y, w, h) = cv.boundingRect(Contour)
-        cv.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2) # rectangle movmed objects
+    # for Contour in Contours:
+    #     (x, y, w, h) = cv.boundingRect(Contour)
+    #     cv.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2) # rectangle movmed objects
 
     Faces, img = Face_Detector.findFaces(image) # Find Faces
     Hands, image = Hand_Detector.findHands(image) # Find Hands
