@@ -96,10 +96,6 @@ while True:
     else:
         pass
 
-        """
-        bad az inke How_are_you() anjam shod age fasele beyn angosht shast va eshare kamtar az {x} bood kr masalan bege khoobam bege "Its great!"
-        """
-
     # Show it!
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
     cv.imshow("Robot vision", image) # Show (Hands on) camera video
