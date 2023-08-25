@@ -75,7 +75,7 @@ while True:
     eyes = eye_cascade.detectMultiScale(Faces) # Find eyes
     smiles = smile_cascade.detectMultiScale(Faces, 1.8, 20) # Find smiles
     Poses = Pose_Detector.findPose(image) # Find Poses
-    # Rectangle eyes, smiles and bodys:
+    # Rectangle eyes, smiles:
     for (ex, ey, ew, eh) in eyes: 
         cv.rectangle(image, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2) # rectangle eyes
     for (ex, ey, ew, eh) in smiles: 
