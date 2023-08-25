@@ -14,6 +14,7 @@
   - cv2(opencv)
 # How to install?
   You can write these codes in CMD or Console to download librarys:
+  
       pip install cvzone
 
       pip install numpy
