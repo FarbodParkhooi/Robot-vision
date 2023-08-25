@@ -85,16 +85,15 @@ while True:
         center = bboxInfo["center"]
         cv.circle(image, center, 5, (255, 0, 255), cv.FILLED)
     
-    # Say words after:
-    if says[0] != "sayed":
-        if len(Poses) > 0: # if body is in image then:
-            if Hands: # if hand is in camera
-                if Faces in image: # if face is in camera
-                    if len(eyes) > 0: # if eye is in camera
-                        code = Hello() # Say hello
-                        says[0] = "sayed" # add sayed
-    else:
-        pass
+    
+    if Hands:
+        Hand1 = Hands[0]
+        # List of hand landmarks
+        lmList1 = Hand1["lmList"]
+        # Find lenght of landmark 4 - 20
+        Hand1_length, _, _ = Hand_Detector.findDistance(lmList1[4][:-1], lmList1[20][:-1], image)
+        if Hand1_length > 160: # If lenght > 160 then say Hello
+            Hello()
 
     # Show it!
     cv.imshow("Robot vision", Faces) # Show (Faces on) camera video
